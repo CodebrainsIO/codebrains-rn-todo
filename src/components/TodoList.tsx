@@ -4,28 +4,28 @@ import { Divider, List, ListItem, TopNavigation, Text } from '@ui-kitten/compone
 import { createTodo, deleteTodo, loadTodos, updateTodo } from '../services/todoService';
 import { Input, Layout, Button } from '@ui-kitten/components';
 import TodoItem from './TodoItem';
+import TodoForm from './TodoForm';
 
 const TodoList = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [todos, setTodos] = useState([]);
-  const [value, setValue] = React.useState('');
 
   const handleFormSubmit = (todo) => {
     console.log('Todo to create', todo);
-    createTodo(todo).then(onRefresh());
+    createTodo(todo).then(() => onRefresh());
     //message.success('Todo added!');
   };
 
   const handleRemoveTodo = (todo) => {
     console.log('Todo to remove', todo);
-    deleteTodo(todo.id).then(onRefresh());;
+    deleteTodo(todo.id).then(() => onRefresh());;
     //message.warn('Todo removed!');
   };
 
   const handleToggleTodoStatus = (todo) => {
     console.log('Todo to change', todo);
     todo.completed = !todo.completed;
-    updateTodo(todo).then(onRefresh());;
+    updateTodo(todo).then(() => onRefresh());;
     //message.info('Todo state updated!');
   };
 
@@ -60,20 +60,7 @@ const TodoList = () => {
         title='Codebrains Todo'
       />
       <Divider />
-      <Layout style={styles.rowContainer} level='1'>
-        <Input
-          style={styles.input}
-          status='basic'
-          placeholder='Enter your todo'
-          onChangeText={nextValue => setValue(nextValue)}
-        />
-
-        <View style={styles.controlContainer}>
-          <Button style={styles.button} size='tiny'>
-            SUBMIT
-          </Button>
-        </View>
-      </Layout>
+      <TodoForm onFormSubmit={handleFormSubmit} />
       <Divider />
       {todos.length > 0 ? (<List
         style={styles.container}
