@@ -2,7 +2,7 @@ import { Button, Input, Layout } from '@ui-kitten/components';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-const TodoForm = ({onFormSubmit}) => {
+const TodoForm = ({ onFormSubmit }) => {
 
   const [value, setValue] = React.useState('');
 
@@ -10,25 +10,25 @@ const TodoForm = ({onFormSubmit}) => {
     onFormSubmit({
       title: value,
       completed: false
-  });
+    });
     setValue('');
   }
 
   return (
-  <Layout style={styles.rowContainer} level='1'>
-    <Input
-      style={styles.input}
-      status='basic'
-      placeholder='Enter your todo'
-      onChangeText={nextValue => setValue(nextValue)}
-    />
+    <Layout style={styles.rowContainer} level='1'>
+      <Input
+        style={styles.input}
+        status='basic'
+        placeholder='Enter your todo'
+        onChangeText={nextValue => setValue(nextValue)}
+      />
 
-    <View style={styles.controlContainer}>
-      <Button style={styles.button} size='tiny' onPress={handleSubmit}>
-        SUBMIT
-      </Button>
-    </View>
-  </Layout>
+      <View style={styles.controlContainer}>
+        <Button style={styles.button} size='tiny' onPress={handleSubmit}>
+          SUBMIT
+        </Button>
+      </View>
+    </Layout>
   );
 }
 

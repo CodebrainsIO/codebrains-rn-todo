@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl, StyleSheet, View } from 'react-native';
-import { Divider, List, ListItem, TopNavigation, Text } from '@ui-kitten/components';
+import { Divider, List, ListItem, TopNavigation, Text, Spinner } from '@ui-kitten/components';
 import { createTodo, deleteTodo, loadTodos, updateTodo } from '../services/todoService';
 import { Input, Layout, Button } from '@ui-kitten/components';
 import TodoItem from './TodoItem';
@@ -62,18 +62,25 @@ const TodoList = () => {
       <Divider />
       <TodoForm onFormSubmit={handleFormSubmit} />
       <Divider />
-      {todos.length > 0 ? (<List
-        style={styles.container}
-        data={todos}
-        ItemSeparatorComponent={Divider}
-        renderItem={TodoItem}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        }
-      />):(<Text>No Todos</Text>)}
+      {refreshing ? (
+        <Spinner />
+      ) : (
+        <>
+          {todos.length > 0 ? (<List
+            style={styles.container}
+            data={todos}
+            ItemSeparatorComponent={Divider}
+            renderItem={TodoItem}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />
+            }
+          />) : (<Text>No Todos</Text>)}
+        </>
+      )}
+
 
     </>
   );
