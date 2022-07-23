@@ -66,18 +66,21 @@ const TodoList = () => {
         <Spinner />
       ) : (
         <>
-          {todos.length > 0 ? (<List
+          {todos.length > 0 ? (
+          
+          <List
             style={styles.container}
             data={todos}
             ItemSeparatorComponent={Divider}
-            renderItem={TodoItem}
+            renderItem={(item) => TodoItem(item, handleRemoveTodo, handleToggleTodoStatus)}
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={onRefresh}
               />
             }
-          />) : (<Text>No Todos</Text>)}
+          />
+          ) : (<Text>No Todos</Text>)}
         </>
       )}
 
