@@ -1,4 +1,4 @@
-const baseUrl = `http://localhost:8000/todos`;
+const baseUrl = `http://10.0.2.2:8000/todos`;
 
 export const loadTodos = () => {
   return fetch(baseUrl).then((res) => res.json());
